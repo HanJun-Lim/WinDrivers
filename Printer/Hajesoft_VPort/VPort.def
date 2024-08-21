@@ -1,0 +1,5 @@
+LIBRARY VPort
+
+EXPORTS
+    InitializePrintMonitor2
+
