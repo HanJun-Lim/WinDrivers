@@ -19,3 +19,6 @@ Win32 API를 사용하면 인증작업 없이 프린터 드라이버를 설치�
    - (Win11 기준) 설정 -> Bluetooth 및 장치 > 프린터 및 스캐너 에서 HAJESOFT PRINTER 가 설치되어 있는지 확인
    - 프린터 속성 -> 장치 설정 -> 용지함 설정 양식 에서 Hajesoft Form #0 항목이 있는지 확인 (GPD 파일에 기술된 내용)
 
+4. 프린터를 삭제하기 위해서는 아래와 같이 진행합니다
+   - (Win11 기준) 설정 -> Bluetooth 및 장치 > 프린터 및 스캐너 에서 HAJESOFT PRINTER 제거
+   - C:\Windows\System32\spool\drivers\x64 위치의 UNIDRV.DLL, UNIDRVUI.DLL, HAJEPRINTER.GPD 제거
