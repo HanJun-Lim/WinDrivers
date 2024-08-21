@@ -1,0 +1,148 @@
+*GPDSpecVersion: "1.0"
+*Include: "StdNames.gpd"
+*GPDFileVersion: "1.0"
+*GPDFileName: "hajeprinter.gpd"
+*ModelName: "HAJESOFT PRINTER"
+*MasterUnits: PAIR(600, 600)
+*PrinterType: PAGE
+*MaxCopies: 999
+*Feature: Orientation
+{
+	*rcNameID: =ORIENTATION_DISPLAY
+	*DefaultOption: PORTRAIT
+	*Option: PORTRAIT
+	{
+		*rcNameID: =PORTRAIT_DISPLAY
+		*Command: CmdSelect
+		{
+			*Order: DOC_SETUP.6
+			*Cmd: ""
+		}
+	}
+	*Option: LANDSCAPE_CC90
+	{
+		*rcNameID: =LANDSCAPE_DISPLAY
+		*Command: CmdSelect
+		{
+			*Order: DOC_SETUP.8
+			*Cmd: ""
+		}
+	}
+}
+*Feature: InputBin
+{
+    *rcNameID: =PAPER_SOURCE_DISPLAY
+    *DefaultOption: Auto
+    *Option: Auto
+    {
+        *Name: "Auto"
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.8
+        }
+    }
+}
+
+*SendMultipleRows?: TRUE
+*%*MaxMultipleRowBytes: 256
+
+*Feature: Resolution
+{
+    *rcNameID: =RESOLUTION_DISPLAY
+    *DefaultOption: Option1
+    *Option: Option1
+    {
+        *Name: "600 x 600 DPI"
+        *DPI: PAIR(600,600)
+        *TextDPI: PAIR(600, 600)
+        *SpotDiameter: 100
+	*SendMultipleRows?: TRUE
+        *Command: CmdSendBlockData { *Cmd: "<1D763000>"%l{RasterDataWidthInBytes}%l{RasterDataHeightInPixels}}
+    }
+}
+*Feature: PaperSize
+{
+    *rcNameID: =PAPER_SIZE_DISPLAY
+    *DefaultOption: Option1
+    *Option: CUSTOMSIZE
+    {
+        *rcNameID: =USER_DEFINED_SIZE_DISPLAY
+        *MinSize: PAIR(60, 60)
+        *MaxSize: PAIR(101455200, 101455200)
+        *MaxPrintableWidth: 101455200
+        *MinLeftMargin: 0
+    }
+    *Option: Option1
+    {
+        *Name:"Hajesoft Form #0"
+        *PageDimensions: PAIR(5244, 7674)
+        *PrintableArea: PAIR(5244, 7674)
+        *PrintableOrigin: PAIR(0, 0)
+        *MaxPrintableWidth: 5244
+        *CenterPrintable?: FALSE
+        *TopMargin: 0
+        *BottomMargin: 0
+        *MinLeftMargin: 0
+
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.7
+        }
+    }
+}
+*Feature: ColorMode
+{
+    *rcNameID: =COLOR_PRINTING_MODE_DISPLAY
+    *DefaultOption: Mono
+    *Option: Mono
+    {
+        *rcNameID: =MONO_DISPLAY
+        *DevNumOfPlanes: 0
+        *DevBPP: 0
+        *IPCallbackID:1
+        *Color? : FALSE
+    }
+}
+
+*Command: CmdStartDoc
+{
+	*Order: DOC_SETUP.7
+	*Cmd: ""
+}
+*Command: CmdStartPage
+{
+	*Order: PAGE_SETUP.1
+	*Cmd: ""
+}
+*Command: CmdEndJob
+{
+	*Order: JOB_FINISH.1
+	*Cmd: ""
+}
+*Command: CmdCopies
+{
+	*Order: DOC_SETUP.13
+	*Cmd: ""
+}
+
+*RotateCoordinate?: TRUE
+*RotateRaster?: TRUE
+*RotateFont?: TRUE
+*TextCaps: LIST(TC_CR_90,TC_UA_ABLE)
+*MemoryUsage: LIST(FONT, RASTER, VECTOR)
+*CursorXAfterCR: AT_PRINTABLE_X_ORIGIN
+*BadCursorMoveInGrxMode: LIST(X_PORTRAIT,Y_LANDSCAPE)
+*XMoveThreshold: 0
+*YMoveThreshold: 0
+*XMoveUnit: 600
+*YMoveUnit: 600
+*EjectPageWithFF?: TRUE
+*OutputDataFormat: H_BYTE
+*OptimizeLeftBound?: TRUE
+*CursorXAfterSendBlockData: AT_GRXDATA_ORIGIN
+*CursorYAfterSendBlockData: AUTO_INCREMENT
+
+*Command: CmdCR { *Cmd : "" }
+*Command: CmdLF { *Cmd : "" }
+*Command: CmdFF { *Cmd : "" }
+
