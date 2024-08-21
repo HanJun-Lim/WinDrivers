@@ -1,0 +1,7 @@
+.vs
+
+# 바이너리 파일 제외
+x64	
+Debug
+printer_setup/x64
+printer_setup/Debug
