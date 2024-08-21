@@ -1,4 +1,4 @@
-// printer_setup.cpp : ÄÜ¼Ö ÀÀ¿ë ÇÁ·Î±×·¥¿¡ ´ëÇÑ ÁøÀÔÁ¡À» Á¤ÀÇÇÕ´Ï´Ù.
+ï»¿// printer_setup.cpp : ì½˜ì†” ì‘ìš© í”„ë¡œê·¸ë¨ì— ëŒ€í•œ ì§„ì…ì ì„ ì •ì˜í•©ë‹ˆë‹¤.
 //
 
 #include "stdafx.h"
@@ -31,6 +31,9 @@ int main()
 
 	GetCurrentDirectory(MAX_PATH, CurrentDirectory);
 
+	// UNIDRV.DLL, UNIDRVUI.DLLì´ ë“œë¼ì´ë²„ì™€ í•¨ê»˜ ìˆì–´ì•¼ í•¨.
+	// í•´ë‹¹ ìƒ˜í”Œì—ì„œëŠ” ì„¤ì¹˜ íŒŒì¼ì„ ì´ìš©í•œ ì„¤ì¹˜ ë°©ì‹ì´ ì•„ë‹ˆë¯€ë¡œ, ì›ë³¸ ìœ„ì¹˜ì—ì„œ ë³µì‚¬í•˜ëŠ” ì‘ì—…ì´ í•„ìš” 
+
 	_stprintf_s(CopiedUniDrvPath, MAX_PATH, _T("%s\\%s"), OSPrinterDriverDirectory, _T("UNIDRV.DLL"));
 	_stprintf_s(CopiedUniDrvUIPath, MAX_PATH, _T("%s\\%s"), OSPrinterDriverDirectory, _T("UNIDRVUI.DLL"));
 	_stprintf_s(CopiedGPDFilePath, MAX_PATH, _T("%s\\%s"), OSPrinterDriverDirectory, _T("HAJEPRINTER.GPD"));
@@ -48,9 +51,9 @@ int main()
 	if (CopyFile(SystemUniDrvUIPath, CopiedUniDrvUIPath, FALSE) == FALSE)
 		goto exit;
 
-	// GPD File, UNIDRV.DLL, UNIDRVUI.DLL ¸ğµÎ OSPrinterDriverDirectory Æú´õ·Î º¹»ç°¡ µÇ¾ú½À´Ï´Ù
+	// GPD File, UNIDRV.DLL, UNIDRVUI.DLL ëª¨ë‘ OSPrinterDriverDirectory í´ë”ë¡œ ë³µì‚¬ê°€ ë˜ì—ˆìŠµë‹ˆë‹¤
 
-	// ÇÁ¸°ÅÍµå¶óÀÌ¹ö¸¦ ¼³Ä¡ÇÕ´Ï´Ù
+	// 1. í”„ë¦°í„° ë“œë¼ì´ë²„ë¥¼ ì„¤ì¹˜í•©ë‹ˆë‹¤
 	DriverInfo3.cVersion = 0x03;
 	DriverInfo3.pName = _T("HAJESOFT PRINTER");
 	DriverInfo3.pEnvironment = NULL;
@@ -67,8 +70,8 @@ int main()
 		goto exit;
 
 
-	// ÇÁ¸°ÅÍÀåÄ¡¸¦ ¼³Ä¡ÇÕ´Ï´Ù
-	_stprintf_s(szPort, MAX_PATH, _T("LPT1:")); // ÇÁ¸°ÅÍÆ÷Æ®¸¦ ÁöÁ¤ÇÕ´Ï´Ù
+	// 2. í”„ë¦°í„° ì¥ì¹˜ë¥¼ ì„¤ì¹˜í•©ë‹ˆë‹¤
+	_stprintf_s(szPort, MAX_PATH, _T("LPT1:")); // í”„ë¦°í„°í¬íŠ¸ë¥¼ ì§€ì •í•©ë‹ˆë‹¤
 
 	PrinterInfo.pPrinterName = _T("HAJESOFT PRINTER");
 	PrinterInfo.pPortName = szPort;
