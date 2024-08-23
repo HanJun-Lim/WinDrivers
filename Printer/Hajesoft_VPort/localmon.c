@@ -1,4 +1,4 @@
-#include "precomp.h"
+﻿#include "precomp.h"
 
 
 #pragma hdrstop
@@ -55,6 +55,17 @@ LocalMonCleanUp(
     DeleteCriticalSection(&LcmSpoolerSection);
 }
 
+/// <summary>
+/// 스풀러가 프린터 포트에 대한 열거를 하고 싶어서 프린터 포트의 이름을 찾고자 할때마다 호출
+/// </summary>
+/// <param name="hMonitor"></param>
+/// <param name="pName"></param>
+/// <param name="Level"></param>
+/// <param name="pPorts"></param>
+/// <param name="cbBuf"></param>
+/// <param name="pcbNeeded"></param>
+/// <param name="pcReturned"></param>
+/// <returns></returns>
 BOOL WINAPI
 LcmEnumPorts(
     __in                        HANDLE  hMonitor,
@@ -110,6 +121,9 @@ LcmEnumPorts(
                     break;
                 }
 
+                
+                // 각 레벨에 맞는 포트에 대한 정보 구조체가 있으며,
+                // 그 구조체의 포맷에 맞게끔 VPort는 자신이 가진 포트의 이름을 돌려주면 됨
                 switch (Level) {
                 case 1:
                     pPorts+=sizeof(PORT_INFO_1);
@@ -286,6 +300,12 @@ MONITOR2 Monitor2 = {
 };
 
 
+/// <summary>
+/// 스풀러가 로딩될 때, MONITOR2 구조체에 정보를 채우기 위해 해당 함수를 호출함
+/// </summary>
+/// <param name="pMonitorInit"></param>
+/// <param name="phMonitor"></param>
+/// <returns></returns>
 LPMONITOR2 WINAPI
 InitializePrintMonitor2(
     PMONITORINIT pMonitorInit,
